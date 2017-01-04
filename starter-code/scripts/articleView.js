@@ -45,21 +45,26 @@ articleView.handleAuthorFilter = function() {
 };
 
 articleView.handleCategoryFilter = function() {
-  /* TODO: Just like we do for #author-filter above, we should also handle
+  /* DONE: Just like we do for #author-filter above, we should also handle
   change events on the #category-filter element. Be sure to reset the
   #author-filter while you're at it! */
   $('#category-filter').on('change', function() {
     if($(this).val()) {
-
-        $('article').hide();
-
+      $('article').hide();
+      var $categoryValue = $(this).val();
+      $('article').each(function(){
+        if ($(this).attr('data-category') === $categoryValue) {
+          $(this).fadeIn();
+        }
+      });
+    } else {
+      $('article').fadeIn();
     }
-
+    $('#author-filter').val('');
   });
-
-
-
 };
+
+
 
 articleView.handleMainNav = function () {
   $('.main-nav').on('click', '.tab', function() {
